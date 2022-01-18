@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Sneakers Details</h1>
+
+<div class="card">
+  <div class="card-content">
+    <span class="card-title">{{ sneaker.name }}</span>
+    <p>Release Year: {{ sneaker.year }}</p>
+    <p>Size: {{ sneaker.size }}</p>
+    <p>Price: {{ sneaker.price }}</p>
+  <div class="card-action">
+    <a href="{% url 'sneakers_update' sneaker.id %}">Edit</a>
+    <a href="{% url 'sneakers_delete' sneaker.id %}">Delete</a>
+  </div>
+  </div>
+</div>
+<div class="col s6">
+  <form action="{% url 'add_resale' sneaker.id %}" method="POST">
+    {% csrf_token %}
+    {{ resale_form.as_p }}
+    <input type="submit" class="btn" value="Add Resale Price">
+  </form>
+  <table class="striped">
+    <table class="striped">
+      <thead>
+        <tr><th>Date</th><th>Resale Price</th></tr>
+      </thead>
+      <tbody>
+        {% for resale in sneaker.resale_set.all %}
+          <tr>
+            <td>{{resale.date}}</td>
+            <td>{{resale.price}}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col s6">
+    <h3>{{ sneaker.name }}'s Conditions</h3>
+    {% if sneaker.conditions.count %}
+      {% for condition in sneaker.conditions.all %}
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">
+              {{ sneaker.conditions.quality }}
+            </span>
+          </div>
+          <div class="card-action">
+            <form action="{% url 'unassoc_condition' sneaker.id condition.id %}" method="POST">
+              {% csrf_token %}
+              <button type="submit" class="btn">Remove</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <h5>No Condition Listed</h5>
+    {% endif %}
+  </div>
+  <div class="col s6">
+    <h3>Available Conditions</h3>
+    {% if conditions.count %}
+    {% for condition in conditions.all %}
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">
+              {{ condition.quality }}
+            </span>
+          </div>
+          <div class="card-action">
+            <form action="{% url 'assoc_condition' sneaker.id condition.id %}" method="POST">
+              {% csrf_token %}
+              <button type="submit" class="btn">Add</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <h5>{{sneaker.name}} Already Has Conditions Listed</h5>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

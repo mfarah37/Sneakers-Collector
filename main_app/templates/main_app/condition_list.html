@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Condition List</h1>
+
+{% for condition in condition_list %}
+  <a href="{% url 'conditions_detail' condition.id %}">
+    <div class="card">
+        <div class="card-content">
+            <span class="card-title">{{ condition.quality }}</span>
+        </div>
+    </div>
+  </a>
+{% endfor %}
+
+{% endblock %}
