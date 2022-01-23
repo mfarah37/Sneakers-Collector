@@ -46,7 +46,7 @@
         <div class="card">
           <div class="card-content">
             <span class="card-title">
-              {{ sneaker.conditions.quality }}
+              {{ condition.quality }}
             </span>
           </div>
           <div class="card-action">
@@ -61,26 +61,26 @@
       <h5>No Condition Listed</h5>
     {% endif %}
   </div>
-  <div class="col s6">
+  <div class="col s6 m6 l6">
     <h3>Available Conditions</h3>
     {% if conditions.count %}
-    {% for condition in conditions.all %}
-        <div class="card">
-          <div class="card-content">
-            <span class="card-title">
+      {% for condition in conditions.all %}
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">
               {{ condition.quality }}
-            </span>
+          </span>
           </div>
           <div class="card-action">
             <form action="{% url 'assoc_condition' sneaker.id condition.id %}" method="POST">
               {% csrf_token %}
-              <button type="submit" class="btn">Add</button>
+              <button type="submit" class="btn">Add Condition</button>
             </form>
           </div>
         </div>
       {% endfor %}
     {% else %}
-      <h5>{{sneaker.name}} Already Has Conditions Listed</h5>
+      <h5>Already Has Conditions Listed</h5>
     {% endif %}
   </div>
 </div>

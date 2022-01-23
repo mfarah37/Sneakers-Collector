@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Sneaker, Condition
 from .forms import ResaleForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
+from .models import Sneaker, Condition
 
 #VIEW FUNCTIONS
 # Create your views here.
@@ -23,7 +23,7 @@ def sneakers_detail(request, sneaker_id):
     resale_form = ResaleForm()
     return render(request, 'sneakers/detail.html', { 
         'sneaker': sneaker, 'resale_form': resale_form,
-        'conidtions': conditions_sneaker_doesnt_have
+        'conditions': conditions_sneaker_doesnt_have
         })
 
 def add_resale(request, sneaker_id):
@@ -40,7 +40,7 @@ def assoc_condition(request, sneaker_id, condition_id):
 
 def unassoc_condition(request, sneaker_id, condition_id):
   Sneaker.objects.get(id=sneaker_id).conditions.remove(condition_id)
-  return redirect('detail', condition_id=condition_id)
+  return redirect('detail', sneaker_id=sneaker_id)
 
 # Class-Based Views
 class SneakerCreate(CreateView):
