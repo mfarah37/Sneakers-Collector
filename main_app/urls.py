@@ -17,4 +17,5 @@ urlpatterns = [
     path('conditions/create/', views.ConditionCreate.as_view(), name='conditions_create'),
     path('conditions/<int:pk>/update/', views.ConditionUpdate.as_view(), name='conditions_update'),
     path('conditions/<int:pk>/delete/', views.ConditionDelete.as_view(), name='conditions_delete'),
+    path('sneakers/<int:sneaker_id>/add_photo/', views.add_photo, name='add_photo'),
 ] 

@@ -2,7 +2,20 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  font-family: 'Shadows Into Light', cursive;
+  margin: 0 auto;
+  color: lightcoral;
+
+  /* background styling */
+  background-image: url('../css/imgs/sneakers.png');
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+
 }
+
 
 main {
   flex: 1 0 auto;

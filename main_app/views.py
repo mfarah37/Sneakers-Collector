@@ -3,7 +3,10 @@ from django.http import HttpResponse
 from .forms import ResaleForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
-from .models import Sneaker, Condition
+from .models import Sneaker, Condition, Photo
+import uuid
+import boto3
+import os
 
 #VIEW FUNCTIONS
 # Create your views here.
@@ -41,6 +44,22 @@ def assoc_condition(request, sneaker_id, condition_id):
 def unassoc_condition(request, sneaker_id, condition_id):
   Sneaker.objects.get(id=sneaker_id).conditions.remove(condition_id)
   return redirect('detail', sneaker_id=sneaker_id)
+
+def add_photo(request, sneaker_id):
+  photo_file = request.FILES.get('photo-file', None)
+  print(photo_file)
+  if photo_file:
+    s3 = boto3.client('s3')
+    key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+    try: 
+      bucket = os.environ['S3_BUCKET']
+      s3.upload_fileobj(photo_file, bucket, key)
+      url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
+      Photo.objects.create(url=url, sneaker_id=sneaker_id)
+    except:
+      print('An error occurred uploading file to S3')
+    return redirect('detail', sneaker_id=sneaker_id)
+
 
 # Class-Based Views
 class SneakerCreate(CreateView):
