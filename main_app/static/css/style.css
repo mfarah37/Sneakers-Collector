@@ -4,18 +4,15 @@ body {
   flex-direction: column;
   font-family: 'Shadows Into Light', cursive;
   margin: 0 auto;
-  color: lightcoral;
-
+  color: red;
+  
   /* background styling */
-  background-image: url('../css/imgs/sneakers.png');
+  background-image: url('../imgs/sneakers.png');
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-
-
 }
-
 
 main {
   flex: 1 0 auto;
@@ -24,4 +21,10 @@ main {
 footer.page-footer {
   padding-top: 0;
   text-align: right;
+}
+
+.resale, .photo {
+  background-color: white;
+  opacity: 90%;
+  border-radius: 5%;
 }

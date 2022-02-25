@@ -20,10 +20,12 @@
         </ul>
         <ul>
           <li class="right"><a href="/about">About</a></li>
-          <li><a href="{% url 'conditions_create' %}">Add a Condition</a></li>
-          <li><a href="{% url 'conditions_index' %}">View All Conditions</a></li>
           <li class="right"><a href="{% url 'sneakers_create' %}">Add a Sneaker</a></li>
           <li class="right"><a href="/sneakers">View All My Sneakers</a></li>
+        </ul>
+        <ul id="dropdown1" class="dropdown-content">
+          <li><a href="{% url 'conditions_create' %}">Add a Condition</a></li>
+          <li><a href="{% url 'conditions_index' %}">View All Conditions</a></li>
         </ul>
       </div>
     </nav>

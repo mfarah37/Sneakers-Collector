@@ -63,17 +63,17 @@ def add_photo(request, sneaker_id):
 
 # Class-Based Views
 class SneakerCreate(CreateView):
-    model = Sneaker
-    fields = ['name', 'year', 'size', 'price']
-    success_url = '/sneakers'
+  model = Sneaker
+  fields = ['name', 'year', 'size', 'price']
+  success_url = '/sneakers'
 
 class SneakerUpdate(UpdateView):
-    model = Sneaker
-    fields = ['name', 'year', 'size', 'price']
+  model = Sneaker
+  fields = ['name', 'year', 'size', 'price']
 
 class SneakerDelete(DeleteView):
-    model = Sneaker
-    success_url = '/sneakers/'
+  model = Sneaker
+  success_url = '/sneakers/'
 
 class ConditionList(ListView):
   model = Condition

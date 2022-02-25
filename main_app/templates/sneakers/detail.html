@@ -21,7 +21,7 @@
   {% empty %}
   <div class="card-panel green-text">No Photos Uploaded</div>
   {% endfor %}
-  <form action="{% url 'add_photo' sneaker.id %}" enctype="multipart/form-data" method="POST" class="card-panel center">
+  <form action="{% url 'add_photo' sneaker.id %}" enctype="multipart/form-data" method="POST" class="card-panel center photo">
       {% csrf_token %}
       <input type="file" name="photo-file">
       <br><br>
@@ -35,7 +35,7 @@
     {{ resale_form.as_p }}
     <input type="submit" class="btn" value="Add Resale Price">
   </form>
-  <table class="striped">
+  <table class="striped resale">
     <thead>
       <tr><th>Date</th><th>Resale Price</th></tr>
     </thead>
